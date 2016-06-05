@@ -1,3 +1,5 @@
+#!/usr/bin/python
+#v0.0.0.1
 import requests
 import getpass
 ktf = requests.Session()
