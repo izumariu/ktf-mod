@@ -1,10 +1,25 @@
-#!/usr/bin/python
-#v0.0.0.1
+#/usr/bin/python
+#v0.0.0.2
 import requests
 import getpass
 ktf = requests.Session()
 
+update_url = "https://raw.githubusercontent.com/sesshomariu/ktf-mod/master/ktf_mod.py"
 usrlist_base = "http://www.klartraumforum.de/forum/memberlist.php?sort=postnum&order=desc&perpage=500&page="
+
+def updateScript():
+	import urllib
+	import shutil
+	urllib.urlretrieve(update_url,"update.py")
+	f = open("update.py").readlines()[1][2:-1]
+	if f != open("ktf_mod.py").readlines()[1][2:-1]:
+		shutil.copy("update.py","ktf_mod.py")
+	try:
+		os.remove("update.py")
+	except:
+		pass
+	import ktf_mod
+	exit()
 
 class bcolors:
     HEADER = '\033[95m'
@@ -95,7 +110,7 @@ def findUsrId():
 def change_board(com):
 	pass
 
-
+updateScript()
 usr_u = raw_input("%sPlease log in.\nUsername > %s"%(bcolors.OKBLUE, bcolors.ENDC))
 pwd_u = getpass.getpass("%sPassword(input will be hidden) > %s"%(bcolors.OKBLUE, bcolors.ENDC))
 if (login(usr_u,pwd_u)):
